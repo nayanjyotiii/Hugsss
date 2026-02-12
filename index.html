@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Hug Day! 🤗</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ff9e9e;
+            --bg: #fff0f3;
+            --text: #5e3a3a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(#ffe3e8 2px, transparent 2px);
+            background-size: 30px 30px;
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 107, 107, 0.1);
+            font-size: 2rem;
+            animation: floatUp 10s linear infinite;
+            z-index: 0;
+        }
+
+        .container {
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.15);
+            max-width: 90%;
+            width: 400px;
+            border: 2px solid #fff;
+            transition: transform 0.3s ease;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.5s ease;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            transition: all 0.5s ease;
+        }
+
+        .hug-avatar {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: breathe 3s ease-in-out infinite;
+            user-select: none;
+        }
+
+        .hug-avatar:active { transform: scale(0.8); }
+
+        .hug-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hug-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .counter {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        #count {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes flyAway {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
+        }
+
+        .pop-heart {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container"></div>
+
+    <div class="container">
+        <h1 id="main-title">Happy Hug Day!</h1>
+        <p id="sub-text">Send some big, warm, virtual squeeze to the admin</p>
+        
+        <div class="hug-avatar" id="avatar" onclick="sendHug()">🤗</div>
+        <button class="hug-btn" onclick="sendHug()">Send a Hug</button>
+
+        <div class="counter">
+            Hugs sent today: <span id="count">0</span>
+        </div>
+    </div>
+
+    <script>
+        let hugCount = 0;
+        const emojis = ['💖', '🤗', '🧸', '✨', '❤️', '💞'];
+        
+        // Background hearts
+        const bgContainer = document.getElementById('bg-container');
+        for(let i = 0; i < 15; i++) createBgHeart();
+
+        function createBgHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            bgContainer.appendChild(heart);
+        }
+
+        function sendHug() {
+            hugCount++;
+            document.getElementById('count').innerText = hugCount;
+            
+            // --- TRIGGER LOGIC START ---
+
+            // LOGIC FOR 100 HUGS
+            if (hugCount === 100) {
+                document.getElementById('main-title').innerText = "Congratulations";
+                document.getElementById('sub-text').innerText = "Looks like things got serious... You got  🤰";
+                document.getElementById('avatar').innerText = "🤰";
+            }
+            
+            if (hugCount === 1000) {
+             document.getElementById('main-title').innerText = "Say Yes Please"; 
+                document.getElementById('sub-text').innerText = "Can we make 12 kids together👩‍❤️‍💋‍👨";
+
+                document.getElementById('avatar').innerText = "👩‍❤️‍💋‍👨+🛌+🤰= 12🤭"; 
+            }
+
+            // --- TRIGGER LOGIC END ---
+
+            // Animation
+            const avatar = document.getElementById('avatar');
+            avatar.style.transform = "scale(0.8)";
+            setTimeout(() => { avatar.style.transform = "scale(1.1)"; }, 100);
+            setTimeout(() => { avatar.style.transform = ""; }, 300);
+
+            for (let i = 0; i < 15; i++) createPopHeart();
+        }
+
+        function createPopHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('pop-heart');
+            heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 150 + 50;
+            heart.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
+            heart.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
+            heart.style.animation = `flyAway ${Math.random() * 0.5 + 0.5}s ease-out forwards`;
+            const rect = document.querySelector('.container').getBoundingClientRect();
+            heart.style.left = (rect.left + rect.width / 2) + 'px';
+            heart.style.top = (rect.top + rect.height / 2) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+        }
+    </script>
+</body>
+</html>
