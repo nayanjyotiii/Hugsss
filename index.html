@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Hug Day! 🤗</title>
+    <title>Send 100/1000 Hug/kiss for surprise 🤗</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -141,11 +141,11 @@
     <div id="bg-container"></div>
 
     <div class="container">
-        <h1 id="main-title">Happy Hug Day!</h1>
+        <h1 id="main-title">Happy vellentines Day!</h1>
         <p id="sub-text">Send some big, warm, virtual squeeze to the admin</p>
         
         <div class="hug-avatar" id="avatar" onclick="sendHug()">🤗</div>
-        <button class="hug-btn" onclick="sendHug()">Send a Hug</button>
+        <button class="hug-btn" onclick="sendHug()">Send a kiss/Hug</button>
 
         <div class="counter">
             Hugs sent today: <span id="count">0</span>
@@ -174,8 +174,6 @@
             hugCount++;
             document.getElementById('count').innerText = hugCount;
             
-            // --- TRIGGER LOGIC START ---
-
             // LOGIC FOR 100 HUGS
             if (hugCount === 100) {
                 document.getElementById('main-title').innerText = "Congratulations";
